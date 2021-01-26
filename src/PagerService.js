@@ -26,7 +26,6 @@ class PagerService {
         // 2 & 3- Notify all targets of the proper level & Set Acknowledgement Timeout
         await this.notifyTargetsAndSetTimeout(targets, serviceID, AlertMessage)
 
-
         // 4- Store disfunction on DB
         await this.PersistenceAdapter.insertOrUpdateDisfunction({
             serviceID: serviceID, // search by this key

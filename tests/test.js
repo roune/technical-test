@@ -10,6 +10,8 @@ async function wait(miliseconds) {
     return new Promise(res => setTimeout(res, miliseconds))
 }
 
+const numberOfLevelsOnPolicy = 3
+
 test("USE CASE 1" , async t => {
     t.test("Basic Use Case 1", async t => {
         var epService = new EPService()
@@ -23,7 +25,7 @@ test("USE CASE 1" , async t => {
     
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
     
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
         await wait(50)
@@ -48,7 +50,7 @@ test("USE CASE 2" , async t => {
 
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
 
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
         await wait(50) // Wait to notify. Tests done in Use Case 1
@@ -75,7 +77,7 @@ test("USE CASE 2" , async t => {
 
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
 
         // Notified level 0
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
@@ -117,7 +119,7 @@ test("USE CASE 3" , async t => {
     
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
     
         // Notified level 0
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
@@ -151,7 +153,7 @@ test("USE CASE 4" , async t => {
     
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
     
         // Notified level 0
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
@@ -187,7 +189,7 @@ test("USE CASE 5", async t => {
     
         const serviceID = 1
         servicesProvider.createNewService(serviceID)
-        epService.addNewPolicy(serviceID, 3)
+        epService.addNewPolicy(serviceID, numberOfLevelsOnPolicy)
     
         // Notified level 0
         alertingService.emit("serviceDisfunction", serviceID, `Error on service ${serviceID}`)
@@ -224,8 +226,8 @@ test("MULTIPLE ALERTS USE CASE", async t => {
         const serviceID2 = 2
         servicesProvider.createNewService(serviceID1)
         servicesProvider.createNewService(serviceID2)
-        epService.addNewPolicy(serviceID1, 3)
-        epService.addNewPolicy(serviceID2, 3)
+        epService.addNewPolicy(serviceID1, numberOfLevelsOnPolicy)
+        epService.addNewPolicy(serviceID2, numberOfLevelsOnPolicy)
     
         // Notify service 1 level 0
         alertingService.emit("serviceDisfunction", serviceID1, `Error on service ${serviceID1}`)
